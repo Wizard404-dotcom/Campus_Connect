@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CampusConnect — RV University</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0A0A0F;
+  --bg2:#111118;
+  --bg3:#16161F;
+  --card:#1A1A25;
+  --card2:#1E1E2E;
+  --border:#2A2A3A;
+  --border2:#333348;
+  --text:#F0F0FF;
+  --muted:#8888AA;
+  --muted2:#6666888;
+  --primary:#7C6FE0;
+  --primary-d:#6355C7;
+  --primary-glow:rgba(124,111,224,0.25);
+  --accent:#F59E0B;
+  --green:#10D98A;
+  --red:#FF4D6D;
+  --cyan:#00D4FF;
+  --r:14px;
+  --r2:10px;
+  --shadow:0 4px 24px rgba(0,0,0,.6);
+  --shadow2:0 8px 40px rgba(124,111,224,.15);
+}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:'Inter',inherit}
+::selection{background:var(--primary);color:#fff}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ── GLOW EFFECTS ── */
+.glow{box-shadow:0 0 20px var(--primary-glow)}
+.glow-green{box-shadow:0 0 20px rgba(16,217,138,.2)}
+
+/* ── TAGS ── */
+.tag{display:inline-flex;align-items:center;padding:3px 10px;border-radius:999px;font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.tag-tech{background:rgba(124,111,224,.2);color:#A89CFF;border:1px solid rgba(124,111,224,.3)}
+.tag-cultural{background:rgba(245,158,11,.15);color:#FCD34D;border:1px solid rgba(245,158,11,.25)}
+.tag-sports{background:rgba(16,217,138,.15);color:#6EEFC4;border:1px solid rgba(16,217,138,.25)}
+.tag-workshop{background:rgba(0,212,255,.15);color:#67E8FF;border:1px solid rgba(0,212,255,.25)}
+.tag-law{background:rgba(168,85,247,.15);color:#D8B4FE;border:1px solid rgba(168,85,247,.25)}
+.tag-film{background:rgba(255,77,109,.15);color:#FFA0B3;border:1px solid rgba(255,77,109,.25)}
+.tag-free{background:rgba(16,217,138,.15);color:#6EEFC4;border:1px solid rgba(16,217,138,.25)}
+.tag-paid{background:rgba(245,158,11,.15);color:#FCD34D;border:1px solid rgba(245,158,11,.25)}
+.tag-live{background:rgba(255,77,109,.2);color:#FF4D6D;border:1px solid rgba(255,77,109,.3);animation:pulse-border 2s infinite}
+@keyframes pulse-border{0%,100%{border-color:rgba(255,77,109,.3)}50%{border-color:rgba(255,77,109,.7)}}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 22px;border-radius:var(--r2);border:none;font-size:.85rem;font-weight:600;font-family:'Inter',inherit;transition:all .2s cubic-bezier(.25,.46,.45,.94);position:relative;overflow:hidden;white-space:nowrap}
+.btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0);transition:background .2s}
+.btn:hover::after{background:rgba(255,255,255,.06)}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-d));color:#fff;box-shadow:0 4px 15px rgba(124,111,224,.4)}
+.btn-primary:hover{box-shadow:0 6px 25px rgba(124,111,224,.6);transform:translateY(-1px)}
+.btn-outline{background:transparent;border:1.5px solid var(--border2);color:var(--text)}
+.btn-outline:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-glow)}
+.btn-accent{background:linear-gradient(135deg,#F59E0B,#D97706);color:#fff;box-shadow:0 4px 15px rgba(245,158,11,.3)}
+.btn-accent:hover{box-shadow:0 6px 25px rgba(245,158,11,.5);transform:translateY(-1px)}
+.btn-green{background:linear-gradient(135deg,#10D98A,#059669);color:#fff;box-shadow:0 4px 15px rgba(16,217,138,.3)}
+.btn-green:hover{box-shadow:0 6px 25px rgba(16,217,138,.5);transform:translateY(-1px)}
+.btn-ghost{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--muted)}
+.btn-ghost:hover{background:rgba(255,255,255,.1);color:var(--text)}
+.btn-sm{padding:7px 14px;font-size:.78rem}
+.btn-xs{padding:5px 10px;font-size:.72rem}
+.btn-full{width:100%}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:62px}
+.nav-logo{font-size:1.15rem;font-weight:900;letter-spacing:-.03em;display:flex;align-items:center;gap:10px}
+.logo-badge{background:linear-gradient(135deg,var(--primary),#A78BFA);color:#fff;border-radius:8px;padding:3px 8px;font-size:.9rem;font-weight:800}
+.nav-tabs{display:flex;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:4px;gap:2px}
+.nav-tab{padding:6px 14px;border-radius:7px;font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s;border:none;background:transparent;font-family:'Inter',inherit}
+.nav-tab.active,.nav-tab:hover{background:var(--card2);color:var(--text)}
+.nav-tab.active{color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.nav-right{display:flex;gap:.6rem;align-items:center}
+.avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary),#A78BFA);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;color:#fff;cursor:pointer;transition:transform .2s}
+.avatar:hover{transform:scale(1.1)}
+
+/* ── PAGES ── */
+.page{display:none;animation:fadeIn .3s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(160deg,#0D0D1A 0%,#12102A 50%,#0A0A0F 100%);padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(124,111,224,.12) 0%,transparent 70%);pointer-events:none}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:6px;background:rgba(124,111,224,.15);border:1px solid rgba(124,111,224,.3);border-radius:999px;padding:4px 14px;font-size:.75rem;font-weight:700;color:#A89CFF;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.2rem}
+.hero h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:900;letter-spacing:-.04em;line-height:1.1;margin-bottom:.8rem;background:linear-gradient(135deg,#fff 30%,#A89CFF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.05rem;color:var(--muted);max-width:500px;margin:0 auto 2rem;font-weight:400}
+.hero-btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
+.pill-row{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap}
+.pill{background:rgba(255,255,255,.06);border:1px solid var(--border2);border-radius:999px;padding:4px 13px;font-size:.75rem;font-weight:500;color:var(--muted);transition:all .2s;cursor:pointer}
+.pill:hover{background:var(--primary-glow);border-color:var(--primary);color:#A89CFF}
+
+/* ── STATS ── */
+.stats-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));background:var(--bg3);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.8rem 2rem;text-align:center;gap:1rem}
+.stat-val{font-size:1.9rem;font-weight:900;letter-spacing:-.03em;background:linear-gradient(135deg,#fff,#A89CFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-lbl{font-size:.75rem;color:var(--muted);margin-top:.1rem;font-weight:500}
+
+/* ── SECTION ── */
+.section{padding:3rem 2rem;max-width:1200px;margin:0 auto}
+.section-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.8rem;flex-wrap:wrap;gap:.8rem}
+.section-title{font-size:1.3rem;font-weight:800;letter-spacing:-.02em}
+.section-sub{color:var(--muted);font-size:.83rem;margin-top:.25rem;font-weight:400}
+
+/* ── FILTER BAR ── */
+.filter-bar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.4rem;align-items:center}
+.search-wrap{display:flex;align-items:center;gap:.5rem;background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:8px 14px;flex:1;max-width:300px;transition:border .2s}
+.search-wrap:focus-within{border-color:var(--primary)}
+.search-wrap input{border:none;outline:none;font-size:.85rem;background:transparent;color:var(--text);width:100%;font-family:'Inter',inherit}
+.search-wrap input::placeholder{color:var(--muted)}
+.chip{padding:6px 14px;border-radius:999px;font-size:.78rem;font-weight:600;border:1.5px solid var(--border);background:var(--card);color:var(--muted);cursor:pointer;transition:all .2s}
+.chip:hover{border-color:var(--primary);color:var(--primary)}
+.chip.active{border-color:var(--primary);color:#A89CFF;background:rgba(124,111,224,.15)}
+
+/* ── EVENT GRID ── */
+.event-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.2rem}
+.event-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s;cursor:pointer}
+.event-card:hover{transform:translateY(-5px);box-shadow:var(--shadow2);border-color:var(--border2)}
+.card-banner{height:148px;position:relative;display:flex;align-items:center;justify-content:center;font-size:3.2rem;overflow:hidden}
+.card-banner .overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.7))}
+.seats-badge{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);color:#fff;border-radius:999px;font-size:.68rem;font-weight:700;padding:3px 10px;border:1px solid rgba(255,255,255,.1)}
+.live-badge{position:absolute;top:10px;left:10px;background:rgba(255,77,109,.85);backdrop-filter:blur(8px);color:#fff;border-radius:999px;font-size:.68rem;font-weight:700;padding:3px 10px;display:flex;align-items:center;gap:5px}
+.live-dot{width:6px;height:6px;border-radius:50%;background:#fff;animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.card-body{padding:1.1rem}
+.card-school{font-size:.68rem;color:var(--primary);font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:.3rem}
+.card-title{font-size:.97rem;font-weight:700;margin-bottom:.6rem;line-height:1.35;letter-spacing:-.01em}
+.card-meta{display:flex;flex-direction:column;gap:.22rem;font-size:.78rem;color:var(--muted);margin-bottom:.9rem}
+.card-meta span{display:flex;align-items:center;gap:5px}
+.card-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem}
+.price-chip{font-size:.82rem;font-weight:800;color:var(--green)}
+
+/* ── WIZARD ── */
+.wizard-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.wizard-steps{display:flex;padding:1rem 1.4rem;gap:.4rem;flex-wrap:wrap;border-bottom:1px solid var(--border);background:var(--bg3)}
+.step-chip{display:flex;align-items:center;gap:6px;padding:6px 13px;border-radius:8px;font-size:.76rem;font-weight:700;transition:all .2s;cursor:pointer}
+.step-chip.done{background:rgba(16,217,138,.15);color:var(--green);border:1px solid rgba(16,217,138,.25)}
+.step-chip.active{background:linear-gradient(135deg,var(--primary),var(--primary-d));color:#fff;box-shadow:0 4px 12px rgba(124,111,224,.4)}
+.step-chip.todo{background:var(--bg3);color:var(--muted);border:1px solid var(--border)}
+.step-chip.todo:hover{border-color:var(--border2);color:var(--text)}
+.step-n{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.2);display:inline-flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800}
+.wizard-body{padding:2rem}
+.wizard-body h3{font-size:1.05rem;font-weight:800;margin-bottom:1.4rem;letter-spacing:-.02em}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.field{display:flex;flex-direction:column;gap:.35rem}
+.field label{font-size:.75rem;font-weight:700;color:var(--muted);letter-spacing:.03em;text-transform:uppercase}
+.field input,.field select,.field textarea{background:var(--bg3);border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-size:.85rem;font-family:'Inter',inherit;color:var(--text);outline:none;transition:border .2s}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-glow)}
+.field select option{background:var(--bg2)}
+.field textarea{resize:vertical;min-height:72px}
+.field-full{grid-column:1/-1}
+.reg-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.4rem}
+.reg-tab{padding:7px 15px;border-radius:8px;border:1.5px solid var(--border);font-size:.8rem;font-weight:600;cursor:pointer;background:var(--bg3);color:var(--muted);transition:all .2s;font-family:'Inter',inherit}
+.reg-tab:hover{border-color:var(--border2);color:var(--text)}
+.reg-tab.active{border-color:var(--primary);color:#A89CFF;background:rgba(124,111,224,.12)}
+.wizard-footer{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.8rem;border-top:1px solid var(--border);background:var(--bg3);flex-wrap:wrap;gap:.5rem}
+.step-indicator{font-size:.78rem;color:var(--muted);font-weight:600}
+
+/* ── GEN EVENT PAGE ── */
+.gen-wrap{background:var(--card);border:2px solid var(--primary);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow2)}
+.gen-label{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--accent),#D97706);color:#fff;border-radius:8px;padding:4px 12px;font-size:.7rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+.gen-banner{height:200px;display:flex;align-items:center;justify-content:center;font-size:5rem;position:relative}
+.gen-content{padding:1.8rem}
+.gen-title{font-size:1.55rem;font-weight:900;letter-spacing:-.03em;margin-bottom:.4rem}
+.gen-host{color:var(--muted);font-size:.85rem;margin-bottom:1.1rem;display:flex;align-items:center;gap:6px}
+.gen-info-row{display:flex;gap:1.4rem;flex-wrap:wrap;margin-bottom:1.1rem}
+.gen-info-item{display:flex;align-items:center;gap:7px;font-size:.85rem;color:var(--muted)}
+.progress-wrap{margin:.7rem 0}
+.progress-bg{background:var(--bg3);border-radius:999px;height:8px;overflow:hidden}
+.progress-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--primary),#A78BFA);transition:width .6s cubic-bezier(.25,.46,.45,.94)}
+.progress-lbl{font-size:.73rem;color:var(--muted);margin-top:.3rem;font-weight:500}
+.gen-price{font-size:1.5rem;font-weight:900;color:var(--green);margin-bottom:1rem;letter-spacing:-.02em}
+.gen-actions{display:flex;gap:.6rem;flex-wrap:wrap}
+.qr-box{width:88px;height:88px;border:1.5px solid var(--border2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:2.6rem;background:var(--bg3);flex-shrink:0}
+.share-link{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.6rem 1rem;font-size:.8rem;color:var(--muted);margin-top:1rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.share-link code{background:var(--bg);padding:2px 7px;border-radius:4px;font-size:.77rem;color:#A89CFF}
+
+/* ── TICKETS ── */
+.ticket-list{display:flex;flex-direction:column;gap:.8rem}
+.ticket{background:var(--card);border:1px solid var(--border);border-radius:var(--r);display:flex;align-items:center;gap:1rem;padding:1.1rem 1.4rem;transition:all .2s;cursor:pointer}
+.ticket:hover{border-color:var(--border2);box-shadow:var(--shadow)}
+.t-icon{font-size:2rem;flex-shrink:0}
+.t-info{flex:1}
+.t-title{font-weight:700;font-size:.93rem;letter-spacing:-.01em}
+.t-date{font-size:.78rem;color:var(--muted);margin-top:.15rem}
+.t-right{display:flex;flex-direction:column;align-items:flex-end;gap:.4rem}
+.t-status{font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:999px}
+.ts-ok{background:rgba(16,217,138,.15);color:var(--green);border:1px solid rgba(16,217,138,.25)}
+.ts-pending{background:rgba(245,158,11,.15);color:#FCD34D;border:1px solid rgba(245,158,11,.25)}
+.ts-checked{background:rgba(124,111,224,.15);color:#A89CFF;border:1px solid rgba(124,111,224,.25)}
+
+/* ── PAYMENT ── */
+.demo-warn{background:rgba(245,158,11,.1);border:1.5px solid rgba(245,158,11,.3);border-radius:10px;padding:.7rem 1rem;font-size:.8rem;font-weight:700;color:#FCD34D;display:flex;align-items:center;gap:7px;margin-bottom:1.2rem}
+.pay-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.8rem;max-width:380px}
+.pay-row{display:flex;justify-content:space-between;font-size:.85rem;padding:.35rem 0;border-bottom:1px solid var(--border);color:var(--muted)}
+.pay-total{font-weight:800;font-size:1rem;border:none;color:var(--text);padding-top:.6rem}
+.card-row{display:flex;gap:.6rem;margin-top:.5rem}
+
+/* ── COMMUNITY ── */
+.group-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+.group-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem;display:flex;flex-direction:column;gap:.6rem;transition:all .2s;cursor:pointer}
+.group-card:hover{border-color:var(--border2);box-shadow:var(--shadow);transform:translateY(-2px)}
+.g-icon{font-size:2rem}
+.g-name{font-weight:800;font-size:.92rem;letter-spacing:-.01em}
+.g-members{font-size:.75rem;color:var(--muted)}
+.g-joined{background:rgba(16,217,138,.15);color:var(--green);border:1px solid rgba(16,217,138,.25);padding:6px 13px;border-radius:8px;font-size:.75rem;font-weight:700;display:inline-flex;align-items:center;gap:5px}
+
+/* ── FEED ── */
+.feed-list{display:flex;flex-direction:column;gap:.8rem}
+.post-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem 1.4rem;transition:border .2s}
+.post-card:hover{border-color:var(--border2)}
+.post-header{display:flex;align-items:center;gap:.8rem;margin-bottom:.7rem}
+.post-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.88rem;color:#fff;flex-shrink:0}
+.post-author{font-weight:700;font-size:.88rem}
+.post-time{font-size:.73rem;color:var(--muted)}
+.post-body{font-size:.87rem;line-height:1.6;color:rgba(240,240,255,.85)}
+.post-actions{display:flex;gap:1.2rem;margin-top:.8rem}
+.post-action{font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:5px;cursor:pointer;padding:4px 8px;border-radius:6px;transition:all .2s}
+.post-action:hover{background:rgba(255,255,255,.06);color:var(--text)}
+.post-action.liked{color:var(--primary)}
+
+/* ── NEAR ME ── */
+.loc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.loc-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem;display:flex;gap:.9rem;align-items:flex-start;transition:all .2s}
+.loc-card:hover{border-color:var(--green);box-shadow:0 0 20px rgba(16,217,138,.1)}
+.loc-dot{width:10px;height:10px;border-radius:50%;background:var(--green);margin-top:5px;flex-shrink:0;box-shadow:0 0 0 3px rgba(16,217,138,.2);animation:ping 2s infinite}
+@keyframes ping{0%,100%{box-shadow:0 0 0 3px rgba(16,217,138,.2)}50%{box-shadow:0 0 0 6px rgba(16,217,138,.1)}}
+.loc-name{font-weight:700;font-size:.9rem}
+.loc-place{font-size:.78rem;color:var(--muted);margin-top:.15rem}
+.loc-time{font-size:.72rem;color:var(--muted);margin-top:.2rem;display:flex;align-items:center;gap:4px}
+
+/* ── HOST DASH ── */
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:1.4rem}
+.dash-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.3rem;transition:all .2s}
+.dash-card:hover{border-color:var(--border2)}
+.dash-val{font-size:2rem;font-weight:900;letter-spacing:-.03em;margin-bottom:.2rem}
+.dash-lbl{font-size:.78rem;color:var(--muted);font-weight:500}
+.attendee-row{display:flex;align-items:center;justify-content:space-between;padding:.6rem .8rem;border-radius:8px;font-size:.83rem;background:var(--bg3);margin-bottom:.4rem;transition:background .15s}
+.attendee-row:hover{background:var(--bg2)}
+
+/* ── MODAL ── */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:200;align-items:center;justify-content:center;animation:fadeIn .2s ease}
+.modal-bg.open{display:flex}
+.modal{background:var(--card2);border:1px solid var(--border2);border-radius:var(--r);padding:1.8rem;width:90%;max-width:420px;box-shadow:0 30px 80px rgba(0,0,0,.6);animation:slideUp .3s cubic-bezier(.25,.46,.45,.94)}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.3rem}
+.modal-title{font-size:1rem;font-weight:800;letter-spacing:-.02em}
+.modal-close{background:var(--bg3);border:1px solid var(--border);border-radius:7px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--muted);transition:all .2s;font-family:inherit}
+.modal-close:hover{background:rgba(255,77,109,.15);border-color:rgba(255,77,109,.3);color:var(--red)}
+.success-modal{text-align:center;padding:2rem}
+.success-icon{font-size:3.5rem;margin-bottom:1rem}
+.success-title{font-size:1.2rem;font-weight:800;margin-bottom:.4rem}
+.success-sub{color:var(--muted);font-size:.85rem}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--card2);border:1px solid var(--border2);border-radius:10px;padding:.8rem 1.4rem;font-size:.85rem;font-weight:600;color:var(--text);box-shadow:var(--shadow);z-index:300;transition:transform .35s cubic-bezier(.25,.46,.45,.94);display:flex;align-items:center;gap:.5rem;white-space:nowrap}
+#toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ── UTIL ── */
+.divider{height:1px;background:var(--border);margin:0}
+.badge-new{background:linear-gradient(135deg,var(--primary),#A78BFA);color:#fff;border-radius:999px;font-size:.6rem;font-weight:800;padding:1px 6px;vertical-align:middle;margin-left:4px}
+@media(max-width:768px){
+  nav{padding:0 1rem}
+  .nav-tabs{display:none}
+  .section{padding:2rem 1rem}
+  .hero{padding:3rem 1rem 2.5rem}
+  .form-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="logo-badge">CC</div>
+    CampusConnect
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('events',this)">🗓 Events</button>
+    <button class="nav-tab" onclick="showPage('community',this)">🏘 Community</button>
+    <button class="nav-tab" onclick="showPage('tickets',this)">🎟 My Tickets</button>
+    <button class="nav-tab" onclick="showPage('nearme',this)">📍 Near Me</button>
+    <button class="nav-tab" onclick="showPage('host',this)">⚡ Host</button>
+  </div>
+  <div class="nav-right">
+    <button class="btn btn-outline btn-sm" onclick="toast('👋 Logged in as Rahul Sharma')">Log In</button>
+    <div class="avatar" onclick="toast('👤 Profile: Rahul Sharma · SoCSE')">RS</div>
+  </div>
+</nav>
+
+<!-- ══ PAGE: EVENTS ══ -->
+<div id="page-events" class="page active">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">🎓 RV University · Bengaluru</div>
+    <h1>Your Campus,<br/>Fully Connected</h1>
+    <p>Discover events, register in one tap, join communities, and track every campus moment — built for RVU.</p>
+    <div class="hero-btns">
+      <button class="btn btn-primary" onclick="document.getElementById('event-section').scrollIntoView({behavior:'smooth'})">🔍 Explore Events</button>
+      <button class="btn btn-outline" onclick="showPage('host',document.querySelectorAll('.nav-tab')[4])">➕ Host an Event</button>
+    </div>
+    <div class="pill-row">
+      <span class="pill">SoCSE</span><span class="pill">SDI</span><span class="pill">SoLAS</span>
+      <span class="pill">SoEB</span><span class="pill">SoL</span><span class="pill">SoFMCA</span>
+      <span class="pill">SoAHP</span>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div><div class="stat-val">24</div><div class="stat-lbl">Active Events</div></div>
+    <div><div class="stat-val">1,340</div><div class="stat-lbl">Registrations</div></div>
+    <div><div class="stat-val">18</div><div class="stat-lbl">Communities</div></div>
+    <div><div class="stat-val">7</div><div class="stat-lbl">Schools</div></div>
+    <div><div class="stat-val">6</div><div class="stat-lbl">Live Today</div></div>
+  </div>
+
+  <!-- EVENTS -->
+  <div class="section" id="event-section">
+    <div class="section-hd">
+      <div>
+        <div class="section-title">Upcoming Events</div>
+        <div class="section-sub">RV University · Sep 2026 – Jan 2027</div>
+      </div>
+      <button class="btn btn-ghost btn-sm" onclick="toast('📋 Showing all 24 events')">View All →</button>
+    </div>
+
+    <div class="filter-bar">
+      <div class="search-wrap">
+        <span style="color:var(--muted)">🔍</span>
+        <input type="text" placeholder="Search events…" oninput="filterEvents(this.value)"/>
+      </div>
+      <span class="chip active" onclick="filterChip(this,'all')">All</span>
+      <span class="chip" onclick="filterChip(this,'tech')">Tech</span>
+      <span class="chip" onclick="filterChip(this,'cultural')">Cultural</span>
+      <span class="chip" onclick="filterChip(this,'workshop')">Workshop</span>
+      <span class="chip" onclick="filterChip(this,'sports')">Sports</span>
+      <span class="chip" onclick="filterChip(this,'free')">Free</span>
+      <span class="chip" onclick="filterChip(this,'paid')">Paid</span>
+    </div>
+
+    <div class="event-grid" id="event-grid">
+
+      <div class="event-card" data-cat="cultural free" onclick="openEventDetail('Crossroads 2026','SoLAS · SoFMCA','25 Sep 2026','Main Amphitheatre','Free','Cultural','🎨')">
+        <div class="card-banner" style="background:linear-gradient(135deg,#F59E0B,#EF4444)">
+          🎨<div class="overlay"></div>
+          <div class="live-badge"><div class="live-dot"></div>TODAY</div>
+          <div class="seats-badge">42 seats left</div>
+        </div>
+        <div class="card-body">
+          <div class="card-school">SoLAS · SoFMCA</div>
+          <div class="card-title">Crossroads 2026</div>
+          <div class="card-meta">
+            <span>📅 25 September 2026</span>
+            <span>📍 Main Amphitheatre, RVU</span>
+            <span>👤 SoLAS Student Council</span>
+          </div>
+          <div class="card-footer">
+            <div style="display:flex;gap:.4rem;flex-wrap:wrap"><span class="tag tag-cultural">Cultural</span><span class="tag tag-free">Free</span></div>
+            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();openReg('Crossroads 2026')">Register →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" data-cat="tech free" onclick="openEventDetail('Kalpavikas 2.0','SoCSE · AWS','25–26 Sep 2026','SoCSE Block Seminar Hall','Free','Tech','⚡')">
+        <div class="card-banner" style="background:linear-gradient(135deg,#4F46E5,#7C3AED)">
+          ⚡<div class="overlay"></div>
+          <div class="live-badge"><div class="live-dot"></div>LIVE NOW</div>
+          <div class="seats-badge">12 seats left</div>
+        </div>
+        <div class="card-body">
+          <div class="card-school">SoCSE · AWS</div>
+          <div class="card-title">Kalpavikas 2.0 — AWS Console Masterclass</div>
+          <div class="card-meta">
+            <span>📅 25–26 September 2026</span>
+            <span>📍 SoCSE Block Seminar Hall</span>
+            <span>👤 SoCSE Cloud Club</span>
+          </div>
+          <div class="card-footer">
+            <div style="display:flex;gap:.4rem"><span class="tag tag-tech">Tech</span><span class="tag tag-free">Free</span></div>
+            <button class="btn btn-green btn-sm" onclick="event.stopPropagation();openReg('Kalpavikas 2.0')">Register →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" data-cat="workshop paid" onclick="openEventDetail('QISKIT Fall Fest 2026','SoCSE · IBM Quantum','13–17 Oct 2026','SDI Design Studio','₹499','Workshop','⚛️')">
+        <div class="card-banner" style="background:linear-gradient(135deg,#0EA5E9,#6366F1)">
+          ⚛️<div class="overlay"></div>
+          <div class="seats-badge">200 seats left</div>
+        </div>
+        <div class="card-body">
+          <div class="card-school">SoCSE · IBM Quantum</div>
+          <div class="card-title">QISKIT Fall Fest 2026</div>
+          <div class="card-meta">
+            <span>📅 13–17 October 2026</span>
+            <span>📍 SDI Design Studio + Online</span>
+            <span>👤 SoCSE Quantum Computing Cell</span>
+          </div>
+          <div class="card-footer">
+            <div style="display:flex;gap:.4rem"><span class="tag tag-workshop">Workshop</span><span class="tag tag-paid">₹499</span></div>
+            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();openPayment('QISKIT Fall Fest 2026',499)">Book Ticket →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" data-cat="workshop paid" onclick="openEventDetail('ICEB 2027','SoEB','19–20 Jan 2027','SoEB Auditorium','₹1,200','Conference','📊')">
+        <div class="card-banner" style="background:linear-gradient(135deg,#10B981,#0891B2)">
+          📊<div class="overlay"></div>
+          <div class="seats-badge">150 seats left</div>
+        </div>
+        <div class="card-body">
+          <div class="card-school">SoEB</div>
+          <div class="card-title">International Conference on Economics &amp; Business 2027</div>
+          <div class="card-meta">
+            <span>📅 19–20 January 2027</span>
+            <span>📍 SoEB Auditorium, RVU</span>
+            <span>👤 School of Economics &amp; Business</span>
+          </div>
+          <div class="card-footer">
+            <div style="display:flex;gap:.4rem"><span class="tag tag-workshop">Conference</span><span class="tag tag-paid">₹1,200</span></div>
+            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();openPayment('ICEB 2027',1200)">Book Ticket →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" data-cat="cultural free" onclick="openEventDetail('National Moot Court','SoL','10 Oct 2026','SoL Moot Court Room','Free','Law','⚖️')">
+        <div class="card-banner" style="background:linear-gradient(135deg,#7C3AED,#DB2777)">
+          ⚖️<div class="overlay"></div>
+          <div class="seats-badge">30 seats left</div>
+        </div>
+        <div class="card-body">
+          <div class="card-school">SoL</div>
+          <div class="card-title">National Moot Court Competition</div>
+          <div class="card-meta">
+            <span>📅 10 October 2026</span>
+            <span>📍 SoL Moot Court Room</span>
+            <span>👤 SoL Student Bar Association</span>
+          </div>
+          <div class="card-footer">
+            <div style="display:flex;gap:.4rem"><span class="tag tag-law">Law</span><span class="tag tag-free">Free</span></div>
+            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();openReg('National Moot Court')">Register →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" data-cat="cultural paid" onclick="openEventDetail('Photography Walk','SDI · SoFMCA','5 Oct 2026','Library Lawn','₹250','Creative','📸')">
+        <div class="card-banner" style="background:linear-gradient(135deg,#F97316,#FBBF24)">
+          📸<div class="overlay"></div>
+          <div class="seats-badge">18 seats left</div>
+        </div>
+        <div class="card-body">
+          <div class="card-school">SDI · SoFMCA</div>
+          <div class="card-title">Campus Photography Walk &amp; Workshop</div>
+          <div class="card-meta">
+            <span>📅 5 October 2026</span>
+            <span>📍 Library Lawn</span>
+            <span>👤 SDI Photography Society</span>
+          </div>
+          <div class="card-footer">
+            <div style="display:flex;gap:.4rem"><span class="tag tag-film">Creative</span><span class="tag tag-paid">₹250</span></div>
+            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();openPayment('Photography Walk',250)">Book Ticket →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div><!-- /page-events -->
+
+<!-- ══ PAGE: COMMUNITY ══ -->
+<div id="page-community" class="page">
+  <div class="section">
+    <div class="section-hd">
+      <div>
+        <div class="section-title">Campus Communities</div>
+        <div class="section-sub">Join groups, follow discussions, co-host events</div>
+      </div>
+      <button class="btn btn-green btn-sm" onclick="toast('✅ Create Group wizard coming soon!')">+ New Group</button>
+    </div>
+
+    <div class="group-grid" id="group-grid">
+      <div class="group-card" onclick="joinGroup(this,'Competitive Coding Circle')">
+        <div class="g-icon">💻</div>
+        <div class="g-name">Competitive Coding Circle</div>
+        <div class="g-members">🔓 Public · 234 members · SoCSE</div>
+        <span class="tag tag-tech" style="align-self:flex-start">Tech</span>
+        <button class="btn btn-primary btn-sm join-btn" style="align-self:flex-start" onclick="event.stopPropagation();joinGroup(this.closest('.group-card'),'Competitive Coding Circle')">Join</button>
+      </div>
+      <div class="group-card" onclick="joinGroup(this,'SDI Photography Society')">
+        <div class="g-icon">📸</div>
+        <div class="g-name">SDI Photography Society</div>
+        <div class="g-members">🔓 Public · 87 members · SDI</div>
+        <span class="tag tag-film" style="align-self:flex-start">Creative</span>
+        <button class="btn btn-primary btn-sm join-btn" style="align-self:flex-start" onclick="event.stopPropagation();joinGroup(this.closest('.group-card'),'SDI Photography Society')">Join</button>
+      </div>
+      <div class="group-card" onclick="joinGroup(this,'SoL Moot Court Society')">
+        <div class="g-icon">⚖️</div>
+        <div class="g-name">SoL Moot Court Society</div>
+        <div class="g-members">🔓 Public · 62 members · SoL</div>
+        <span class="tag tag-law" style="align-self:flex-start">Law</span>
+        <button class="btn btn-primary btn-sm join-btn" style="align-self:flex-start" onclick="event.stopPropagation();joinGroup(this.closest('.group-card'),'SoL Moot Court Society')">Join</button>
+      </div>
+      <div class="group-card" onclick="joinGroup(this,'Sports & Wellness Hub')">
+        <div class="g-icon">🏃</div>
+        <div class="g-name">Sports &amp; Wellness Hub</div>
+        <div class="g-members">🔓 Public · 310 members · All Schools</div>
+        <span class="tag tag-sports" style="align-self:flex-start">Sports</span>
+        <button class="btn btn-primary btn-sm join-btn" style="align-self:flex-start" onclick="event.stopPropagation();joinGroup(this.closest('.group-card'),'Sports & Wellness Hub')">Join</button>
+      </div>
+      <div class="group-card" onclick="joinGroup(this,'Film & Media Collective')">
+        <div class="g-icon">🎬</div>
+        <div class="g-name">Film &amp; Media Collective</div>
+        <div class="g-members">🔓 Public · 119 members · SoFMCA</div>
+        <span class="tag tag-film" style="align-self:flex-start">Film</span>
+        <button class="btn btn-primary btn-sm join-btn" style="align-self:flex-start" onclick="event.stopPropagation();joinGroup(this.closest('.group-card'),'Film & Media Collective')">Join</button>
+      </div>
+      <div class="group-card" onclick="toast('🔒 Request sent to SoCSE Club Leads Network')">
+        <div class="g-icon">🔐</div>
+        <div class="g-name">SoCSE Club Leads Network</div>
+        <div class="g-members">🔒 Private · Host-only · 12 members</div>
+        <span class="tag tag-workshop" style="align-self:flex-start">Host Network</span>
+        <button class="btn btn-outline btn-sm" style="align-self:flex-start" onclick="event.stopPropagation();toast('📨 Request sent to SoCSE Club Leads Network')">Request →</button>
+      </div>
+    </div>
+
+    <div style="margin-top:2.5rem">
+      <div class="section-hd">
+        <div>
+          <div class="section-title" style="font-size:1.1rem">📢 Campus Feed</div>
+          <div class="section-sub">Latest from clubs, admin, and your groups</div>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="toast('📝 Post composer opened!')">+ Post</button>
+      </div>
+      <div class="feed-list">
+        <div class="post-card">
+          <div class="post-header">
+            <div class="post-avatar" style="background:linear-gradient(135deg,#4F46E5,#7C3AED)">SC</div>
+            <div><div class="post-author">SoCSE Cloud Club</div><div class="post-time">2 hours ago · SoCSE</div></div>
+          </div>
+          <div class="post-body">🚀 We're LIVE at Kalpavikas 2.0! Only <strong>12 seats left</strong>. Walk in to SoCSE Seminar Hall. AWS t-shirts for first 50 check-ins! 🎽</div>
+          <div class="post-actions">
+            <span class="post-action" onclick="likePost(this)">👍 <span>48</span></span>
+            <span class="post-action" onclick="toast('💬 Comments expanded')">💬 12 Comments</span>
+            <span class="post-action" onclick="toast('🔁 Shared to your feed!')">🔁 Share</span>
+          </div>
+        </div>
+        <div class="post-card">
+          <div class="post-header">
+            <div class="post-avatar" style="background:linear-gradient(135deg,#7C3AED,#A78BFA)">AM</div>
+            <div><div class="post-author">Admin · RV University</div><div class="post-time">1 day ago · Announcement</div></div>
+          </div>
+          <div class="post-body">📌 QISKIT Fall Fest registrations close Oct 10. IBM Quantum researchers as guest speakers — don't miss it!</div>
+          <div class="post-actions">
+            <span class="post-action" onclick="likePost(this)">👍 <span>124</span></span>
+            <span class="post-action" onclick="toast('💬 Comments expanded')">💬 31 Comments</span>
+            <span class="post-action" onclick="toast('🔁 Shared!')">🔁 Share</span>
+          </div>
+        </div>
+        <div class="post-card">
+          <div class="post-header">
+            <div class="post-avatar" style="background:linear-gradient(135deg,#10D98A,#059669)">TR</div>
+            <div><div class="post-author">Trekking Circle</div><div class="post-time">3 hours ago</div></div>
+          </div>
+          <div class="post-body">🏔 Weekend trail run to Skandagiri — 10 slots left! ₹200/head. Leaving Saturday 4 AM from RVU Gate.</div>
+          <div class="post-actions">
+            <span class="post-action" onclick="likePost(this)">👍 <span>67</span></span>
+            <span class="post-action" onclick="toast('💬 Comments expanded')">💬 19 Comments</span>
+            <span class="post-action" onclick="toast('🔁 Shared!')">🔁 Share</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-community -->
+
+<!-- ══ PAGE: MY TICKETS ══ -->
+<div id="page-tickets" class="page">
+  <div class="section">
+    <div class="section-hd">
+      <div>
+        <div class="section-title">My Tickets</div>
+        <div class="section-sub">Your registered events with QR check-in</div>
+      </div>
+      <button class="btn btn-ghost btn-sm" onclick="toast('📥 Tickets exported as PDF')">Export PDF</button>
+    </div>
+    <div class="ticket-list">
+      <div class="ticket" onclick="toast('🎫 QR Code for Kalpavikas 2.0 — Ticket #KAL2026-108')">
+        <div class="t-icon">⚡</div>
+        <div class="t-info">
+          <div class="t-title">Kalpavikas 2.0 — AWS Console Masterclass</div>
+          <div class="t-date">📅 25–26 Sep 2026 · SoCSE Block Seminar Hall · Seat #A-12</div>
+        </div>
+        <div class="t-right">
+          <span class="t-status ts-checked">✓ Checked In</span>
+          <button class="btn btn-outline btn-xs" onclick="event.stopPropagation();toast('▦ QR Code: KAL2026-RS-108')">View QR</button>
+        </div>
+      </div>
+      <div class="ticket" onclick="toast('🎫 QR Code for QISKIT — Ticket #QFF2026-RS-45')">
+        <div class="t-icon">⚛️</div>
+        <div class="t-info">
+          <div class="t-title">QISKIT Fall Fest 2026</div>
+          <div class="t-date">📅 13 Oct 2026 · SDI Design Studio · Paid ₹499</div>
+        </div>
+        <div class="t-right">
+          <span class="t-status ts-ok">✓ Confirmed</span>
+          <button class="btn btn-outline btn-xs" onclick="event.stopPropagation();toast('▦ QR Code: QFF2026-RS-45')">View QR</button>
+        </div>
+      </div>
+      <div class="ticket" onclick="toast('🎫 Crossroads 2026 — payment pending')">
+        <div class="t-icon">🎨</div>
+        <div class="t-info">
+          <div class="t-title">Crossroads 2026</div>
+          <div class="t-date">📅 25 Sep 2026 · Main Amphitheatre</div>
+        </div>
+        <div class="t-right">
+          <span class="t-status ts-pending">⏳ Pending</span>
+          <button class="btn btn-accent btn-xs" onclick="event.stopPropagation();openPayment('Crossroads 2026',0)">Complete →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-tickets -->
+
+<!-- ══ PAGE: NEAR ME ══ -->
+<div id="page-nearme" class="page">
+  <div class="section">
+    <div class="section-hd">
+      <div>
+        <div class="section-title">📍 Hosts Near Me — Right Now</div>
+        <div class="section-sub">Clubs live on campus today — walk up and engage</div>
+      </div>
+      <button class="btn btn-accent btn-sm" onclick="broadcastLocation()">📡 Broadcast My Location</button>
+    </div>
+    <div class="loc-grid">
+      <div class="loc-card"><div class="loc-dot"></div><div><div class="loc-name">SoCSE Cloud Club</div><div class="loc-place">📍 SoCSE Block Seminar Hall</div><div class="loc-time">🕙 Active since 9:30 AM</div></div></div>
+      <div class="loc-card"><div class="loc-dot"></div><div><div class="loc-name">SDI Photography Society</div><div class="loc-place">📍 Library Lawn</div><div class="loc-time">🕙 Active since 11:00 AM</div></div></div>
+      <div class="loc-card"><div class="loc-dot"></div><div><div class="loc-name">SoLAS Student Council</div><div class="loc-place">📍 Main Amphitheatre</div><div class="loc-time">🕙 Active since 10:00 AM</div></div></div>
+      <div class="loc-card"><div class="loc-dot"></div><div><div class="loc-name">Sports &amp; Wellness Club</div><div class="loc-place">📍 Sports &amp; Wellness Ground</div><div class="loc-time">🕙 Active since 7:00 AM</div></div></div>
+      <div class="loc-card"><div class="loc-dot"></div><div><div class="loc-name">SoEB Finance Society</div><div class="loc-place">📍 SoEB Auditorium Foyer</div><div class="loc-time">🕙 Active since 2:00 PM</div></div></div>
+      <div class="loc-card"><div class="loc-dot"></div><div><div class="loc-name">SoFMCA Film Society</div><div class="loc-place">📍 SDI Design Studio</div><div class="loc-time">🕙 Active since 12:00 PM</div></div></div>
+    </div>
+  </div>
+</div><!-- /page-nearme -->
+
+<!-- ══ PAGE: HOST ══ -->
+<div id="page-host" class="page">
+  <div class="section">
+    <div class="section-hd">
+      <div>
+        <div class="section-title">⚡ Create Event Wizard</div>
+        <div class="section-sub">8 guided steps → auto-generated live event page</div>
+      </div>
+    </div>
+
+    <div class="wizard-wrap">
+      <div class="wizard-steps" id="wizard-steps">
+        <div class="step-chip done" onclick="goStep(1)"><div class="step-n">✓</div> Basic Info</div>
+        <div class="step-chip done" onclick="goStep(2)"><div class="step-n">✓</div> Date &amp; Time</div>
+        <div class="step-chip done" onclick="goStep(3)"><div class="step-n">✓</div> Location</div>
+        <div class="step-chip active" onclick="goStep(4)"><div class="step-n">4</div> Capacity</div>
+        <div class="step-chip todo" onclick="goStep(5)"><div class="step-n">5</div> Registration</div>
+        <div class="step-chip todo" onclick="goStep(6)"><div class="step-n">6</div> Pricing</div>
+        <div class="step-chip todo" onclick="goStep(7)"><div class="step-n">7</div> Contact</div>
+        <div class="step-chip todo" onclick="goStep(8)"><div class="step-n">8</div> Generate</div>
+      </div>
+
+      <!-- Step bodies -->
+      <div id="step-1" class="wizard-body" style="display:none">
+        <h3>Step 1 — Basic Info</h3>
+        <div class="form-grid">
+          <div class="field field-full"><label>Event Title *</label><input type="text" placeholder="e.g. Kalpavikas 2.0" value="Kalpavikas 2.0 — AWS Console Masterclass"/></div>
+          <div class="field field-full"><label>Description</label><textarea>Join us for an immersive AWS Console masterclass hosted by RVU SoCSE Cloud Club. Hands-on labs, real deployments, AWS swag!</textarea></div>
+          <div class="field"><label>Category *</label><select><option>Tech</option><option>Cultural</option><option>Sports</option><option>Workshop</option><option>Conference</option></select></div>
+          <div class="field"><label>School / Organiser *</label><select><option>SoCSE</option><option>SoLAS</option><option>SDI</option><option>SoEB</option><option>SoL</option><option>SoFMCA</option><option>SoAHP</option></select></div>
+          <div class="field field-full"><label>Banner Image URL</label><input type="text" placeholder="https://…" value="https://rvu.edu.in/event-banner.jpg"/></div>
+        </div>
+      </div>
+
+      <div id="step-2" class="wizard-body" style="display:none">
+        <h3>Step 2 — Date &amp; Time</h3>
+        <div class="form-grid">
+          <div class="field"><label>Start Date *</label><input type="date" value="2026-09-25"/></div>
+          <div class="field"><label>End Date</label><input type="date" value="2026-09-26"/></div>
+          <div class="field"><label>Start Time *</label><input type="time" value="10:00"/></div>
+          <div class="field"><label>End Time</label><input type="time" value="17:00"/></div>
+          <div class="field field-full"><label>Duration Note</label><input type="text" placeholder="e.g. 2 days / 6 hrs" value="2 days · 10 AM – 5 PM each day"/></div>
+        </div>
+      </div>
+
+      <div id="step-3" class="wizard-body" style="display:none">
+        <h3>Step 3 — Campus Location</h3>
+        <div class="form-grid">
+          <div class="field"><label>Campus *</label><select><option>Bengaluru (Main)</option><option>Mysuru</option></select></div>
+          <div class="field"><label>Venue *</label>
+            <select>
+              <option>SoCSE Block Seminar Hall</option>
+              <option>SDI Design Studio</option>
+              <option>Learning Commons / Library Lawn</option>
+              <option>SoEB Auditorium</option>
+              <option>Sports &amp; Wellness Ground</option>
+              <option>Main Amphitheatre</option>
+              <option>Off-campus (manual)</option>
+            </select>
+          </div>
+          <div class="field field-full"><label>Additional Directions</label><input type="text" placeholder="e.g. Room 204, 2nd floor" value="Ground floor, near SoCSE admin office"/></div>
+        </div>
+      </div>
+
+      <div id="step-4" class="wizard-body">
+        <h3>Step 4 — Capacity &amp; Waitlist</h3>
+        <div class="form-grid">
+          <div class="field"><label>Max Registrations *</label><input type="number" value="120" min="1"/></div>
+          <div class="field"><label>Waitlist</label><select><option>Enable (auto-fill on cancellations)</option><option>Disabled</option></select></div>
+          <div class="field"><label>Waitlist Limit</label><input type="number" value="20" min="0"/></div>
+          <div class="field"><label>Registration Deadline</label><input type="datetime-local" value="2026-09-24T23:59"/></div>
+          <div class="field field-full">
+            <label>Registration Method</label>
+            <div class="reg-tabs">
+              <button class="reg-tab active" onclick="setRegTab(this)">📝 Native Form</button>
+              <button class="reg-tab" onclick="setRegTab(this)">🔗 Google Form</button>
+              <button class="reg-tab" onclick="setRegTab(this)">📲 QR Only</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="step-5" class="wizard-body" style="display:none">
+        <h3>Step 5 — Registration Fields</h3>
+        <div class="form-grid">
+          <div class="field field-full"><label>Fields to Collect</label>
+            <div style="display:flex;flex-direction:column;gap:.5rem;margin-top:.3rem">
+              <label style="display:flex;align-items:center;gap:.5rem;text-transform:none;font-size:.85rem;font-weight:500;color:var(--text);cursor:pointer"><input type="checkbox" checked/> Full Name</label>
+              <label style="display:flex;align-items:center;gap:.5rem;text-transform:none;font-size:.85rem;font-weight:500;color:var(--text);cursor:pointer"><input type="checkbox" checked/> Email</label>
+              <label style="display:flex;align-items:center;gap:.5rem;text-transform:none;font-size:.85rem;font-weight:500;color:var(--text);cursor:pointer"><input type="checkbox" checked/> Roll Number</label>
+              <label style="display:flex;align-items:center;gap:.5rem;text-transform:none;font-size:.85rem;font-weight:500;color:var(--text);cursor:pointer"><input type="checkbox"/> Phone</label>
+              <label style="display:flex;align-items:center;gap:.5rem;text-transform:none;font-size:.85rem;font-weight:500;color:var(--text);cursor:pointer"><input type="checkbox"/> Year of Study</label>
+            </div>
+          </div>
+          <div class="field field-full"><label>Google Form URL (optional backup)</label><input type="url" placeholder="https://forms.gle/…"/></div>
+        </div>
+      </div>
+
+      <div id="step-6" class="wizard-body" style="display:none">
+        <h3>Step 6 — Pricing</h3>
+        <div class="form-grid">
+          <div class="field field-full"><label>Pricing Type *</label>
+            <div class="reg-tabs">
+              <button class="reg-tab active" onclick="setRegTab(this)">🆓 Free</button>
+              <button class="reg-tab" onclick="setRegTab(this)">💰 Paid</button>
+            </div>
+          </div>
+          <div class="field"><label>Price (₹)</label><input type="number" placeholder="499" min="0"/></div>
+          <div class="field"><label>Payment Gateway</label><select><option>Razorpay (Test Mode)</option><option>Stripe (Test Mode)</option></select></div>
+          <div class="field field-full" style="padding:.7rem;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:8px">
+            <span style="font-size:.78rem;color:#FCD34D;font-weight:700">⚠️ Demo Mode — All payments are sandbox/test only. No real money is processed.</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="step-7" class="wizard-body" style="display:none">
+        <h3>Step 7 — Contact Info</h3>
+        <div class="form-grid">
+          <div class="field"><label>Contact Email</label><input type="email" value="socsecloudclub@rvu.edu.in"/></div>
+          <div class="field"><label>WhatsApp / Phone</label><input type="tel" value="+91 89511 79896"/></div>
+          <div class="field field-full"><label>Visibility</label>
+            <div class="reg-tabs">
+              <button class="reg-tab active" onclick="setRegTab(this)">Show Email</button>
+              <button class="reg-tab" onclick="setRegTab(this)">Show Phone</button>
+              <button class="reg-tab active" onclick="setRegTab(this)">Show Both</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="step-8" class="wizard-body" style="display:none">
+        <h3>Step 8 — Review &amp; Generate</h3>
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1.2rem;margin-bottom:1.2rem;display:grid;grid-template-columns:1fr 1fr;gap:.6rem;font-size:.83rem">
+          <div><span style="color:var(--muted)">Title:</span> Kalpavikas 2.0</div>
+          <div><span style="color:var(--muted)">School:</span> SoCSE</div>
+          <div><span style="color:var(--muted)">Date:</span> 25–26 Sep 2026</div>
+          <div><span style="color:var(--muted)">Venue:</span> SoCSE Seminar Hall</div>
+          <div><span style="color:var(--muted)">Capacity:</span> 120</div>
+          <div><span style="color:var(--muted)">Price:</span> Free</div>
+          <div><span style="color:var(--muted)">Registration:</span> Native Form</div>
+          <div><span style="color:var(--muted)">Contact:</span> Email + Phone</div>
+        </div>
+        <button class="btn btn-primary btn-full" style="font-size:.95rem;padding:14px;" onclick="generateEventPage()">
+          🤖 Generate Event Page + QR Code
+        </button>
+      </div>
+
+      <div class="wizard-footer">
+        <button class="btn btn-ghost btn-sm" onclick="prevStep()">← Back</button>
+        <span class="step-indicator" id="step-label">Step 4 of 8</span>
+        <button class="btn btn-primary btn-sm" onclick="nextStep()">Save &amp; Continue →</button>
+      </div>
+    </div>
+
+    <!-- Generated event page (shown after wizard completes) -->
+    <div id="gen-page-wrap" style="display:none;margin-top:2rem">
+      <div class="section-hd">
+        <div style="display:flex;align-items:center;gap:.8rem">
+          <div class="section-title">Generated Event Page</div>
+          <div class="gen-label">🤖 Kiro Auto-Generated</div>
+        </div>
+      </div>
+      <div class="gen-wrap">
+        <div class="gen-banner" style="background:linear-gradient(135deg,#312E81,#7C3AED,#EC4899)">⚡</div>
+        <div class="gen-content">
+          <div style="display:flex;gap:1rem;align-items:flex-start;flex-wrap:wrap">
+            <div style="flex:1;min-width:240px">
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.7rem">
+                <span class="tag tag-tech">Tech</span>
+                <span class="tag tag-workshop">Workshop</span>
+                <span class="tag tag-live">● LIVE NOW</span>
+              </div>
+              <div class="gen-title">Kalpavikas 2.0 — AWS Console Masterclass</div>
+              <div class="gen-host">🏛️ SoCSE Cloud Club · RV University</div>
+              <div class="gen-info-row">
+                <div class="gen-info-item">📅 25–26 Sep 2026</div>
+                <div class="gen-info-item">🕙 10 AM – 5 PM</div>
+                <div class="gen-info-item">📍 SoCSE Seminar Hall</div>
+                <div class="gen-info-item">👥 120 cap</div>
+              </div>
+              <div class="progress-wrap">
+                <div class="progress-bg"><div class="progress-fill" style="width:90%"></div></div>
+                <div class="progress-lbl">108 / 120 registered · 12 seats left!</div>
+              </div>
+              <div class="gen-price">FREE <span style="font-size:.82rem;color:var(--muted);font-weight:400">· No charge</span></div>
+              <div class="gen-actions">
+                <button class="btn btn-primary" onclick="openReg('Kalpavikas 2.0')">📝 Register Now</button>
+                <button class="btn btn-outline" onclick="toast('🔗 Link copied: campusconnect.app/e/kalpavikas-2.0')">📤 Share</button>
+                <button class="btn btn-ghost" onclick="toast('📧 socsecloudclub@rvu.edu.in · 📞 +91 89511 79896')">📞 Contact</button>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:.5rem">
+              <div class="qr-box">▦</div>
+              <div style="font-size:.7rem;color:var(--muted);text-align:center">Scan to register<br/>Share on posters</div>
+              <button class="btn btn-ghost btn-xs" onclick="toast('📥 QR Code downloaded!')">⬇ Download</button>
+            </div>
+          </div>
+          <div class="share-link">
+            🔗 <code>campusconnect.app/e/kalpavikas-2.0</code>
+            <button class="btn btn-ghost btn-xs" onclick="toast('✅ Link copied to clipboard!')">Copy</button>
+            <span style="color:var(--muted)">·</span>
+            <span style="font-size:.75rem;color:var(--muted)">Google Form backup also available</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Host Dashboard -->
+    <div style="margin-top:2.5rem">
+      <div class="section-hd">
+        <div>
+          <div class="section-title" style="font-size:1.1rem">📊 Host Dashboard — Kalpavikas 2.0</div>
+          <div class="section-sub">Live registration stats &amp; attendee management</div>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="toast('📥 Attendee list exported as CSV!')">Export CSV</button>
+      </div>
+      <div class="dash-grid">
+        <div class="dash-card"><div class="dash-val" style="color:var(--primary)">108</div><div class="dash-lbl">Total Registrations</div></div>
+        <div class="dash-card"><div class="dash-val" style="color:var(--green)">94</div><div class="dash-lbl">Checked In</div></div>
+        <div class="dash-card"><div class="dash-val" style="color:var(--accent)">12</div><div class="dash-lbl">Seats Left</div></div>
+        <div class="dash-card"><div class="dash-val" style="color:var(--red)">7</div><div class="dash-lbl">On Waitlist</div></div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--muted);margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em">Recent Registrations</div>
+        <div class="attendee-row"><span>👤 Rahul Sharma · SoCSE</span><span class="t-status ts-checked" style="font-size:.68rem">✓ Checked In</span></div>
+        <div class="attendee-row"><span>👤 Priya Nair · SDI</span><span class="t-status ts-ok" style="font-size:.68rem">✓ Confirmed</span></div>
+        <div class="attendee-row"><span>👤 Arjun Mehta · SoEB</span><span class="t-status ts-ok" style="font-size:.68rem">✓ Confirmed</span></div>
+        <div class="attendee-row"><span>👤 Sneha R · SoLAS</span><span class="t-status ts-pending" style="font-size:.68rem">⏳ Pending</span></div>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-host -->
+
+<!-- ══ REGISTRATION MODAL ══ -->
+<div id="reg-modal" class="modal-bg" onclick="if(event.target===this)closeReg()">
+  <div class="modal" id="reg-content">
+    <div class="modal-header">
+      <div class="modal-title" id="reg-title">Register for Event</div>
+      <button class="modal-close" onclick="closeReg()">✕</button>
+    </div>
+    <div class="form-grid" style="gap:.7rem">
+      <div class="field field-full"><label>Full Name *</label><input type="text" placeholder="Rahul Sharma"/></div>
+      <div class="field field-full"><label>Email *</label><input type="email" placeholder="rahul@rvu.edu.in"/></div>
+      <div class="field"><label>Roll / Employee No.</label><input type="text" placeholder="22SoCSE001"/></div>
+      <div class="field"><label>School</label>
+        <select><option>SoCSE</option><option>SoLAS</option><option>SDI</option><option>SoEB</option><option>SoL</option><option>SoFMCA</option><option>SoAHP</option></select>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-full" style="margin-top:1.1rem" onclick="confirmReg()">Confirm Registration →</button>
+    <div style="text-align:center;font-size:.73rem;color:var(--muted);margin-top:.6rem">A QR ticket will be sent to your email and added to My Tickets.</div>
+  </div>
+</div>
+
+<!-- ══ PAYMENT MODAL ══ -->
+<div id="pay-modal" class="modal-bg" onclick="if(event.target===this)closePay()">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="pay-modal-title">Book Ticket</div>
+      <button class="modal-close" onclick="closePay()">✕</button>
+    </div>
+    <div class="demo-warn">⚠️ DEMO PAYMENT — Razorpay Test Mode — No real money</div>
+    <div class="pay-row"><span>Event ticket (1×)</span><span id="pay-price">₹499</span></div>
+    <div class="pay-row"><span>Platform fee</span><span>₹0</span></div>
+    <div class="pay-row pay-total"><span>Total</span><span id="pay-total">₹499</span></div>
+    <div class="form-grid" style="margin-top:1rem;gap:.7rem">
+      <div class="field field-full"><label>Card Number</label><input type="text" value="4111 1111 1111 1111"/></div>
+      <div class="field"><label>Expiry</label><input type="text" value="12/28"/></div>
+      <div class="field"><label>CVV</label><input type="text" value="123"/></div>
+    </div>
+    <button class="btn btn-green btn-full" style="margin-top:1rem" onclick="mockPay()">🔒 Pay <span id="pay-btn-amt">₹499</span> (Test)</button>
+  </div>
+</div>
+
+<!-- ══ SUCCESS MODAL ══ -->
+<div id="success-modal" class="modal-bg" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="success-modal">
+      <div class="success-icon">🎉</div>
+      <div class="success-title" id="success-title">Registration Confirmed!</div>
+      <div class="success-sub" id="success-sub">Your QR ticket has been generated and added to My Tickets.</div>
+      <div style="margin:1.2rem 0;padding:1rem;background:var(--bg3);border-radius:10px;font-size:2rem;letter-spacing:.3em">▦ ▦ ▦</div>
+      <button class="btn btn-primary" onclick="document.getElementById('success-modal').classList.remove('open');showPage('tickets',document.querySelectorAll('.nav-tab')[2])">View My Tickets →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EVENT DETAIL MODAL ══ -->
+<div id="detail-modal" class="modal-bg" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-header">
+      <div class="modal-title" id="detail-title">Event Details</div>
+      <button class="modal-close" onclick="document.getElementById('detail-modal').classList.remove('open')">✕</button>
+    </div>
+    <div id="detail-body"></div>
+  </div>
+</div>
+
+<!-- ══ TOAST ══ -->
+<div id="toast">🔔 Notification</div>
+
+<script>
+// ── PAGE NAVIGATION ──────────────────────────────
+function showPage(id, tabEl) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  if (tabEl) tabEl.classList.add('active');
+}
+
+// ── FILTER EVENTS ────────────────────────────────
+let activeFilter = 'all';
+function filterChip(el, cat) {
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  activeFilter = cat;
+  applyFilter(document.querySelector('.search-wrap input').value);
+}
+function filterEvents(q) { applyFilter(q); }
+function applyFilter(q) {
+  document.querySelectorAll('#event-grid .event-card').forEach(card => {
+    const cats = card.dataset.cat || '';
+    const title = card.querySelector('.card-title').textContent.toLowerCase();
+    const matchCat = activeFilter === 'all' || cats.includes(activeFilter);
+    const matchQ = !q || title.includes(q.toLowerCase());
+    card.style.display = (matchCat && matchQ) ? '' : 'none';
+  });
+}
+
+// ── WIZARD STEPS ─────────────────────────────────
+let currentStep = 4;
+const totalSteps = 8;
+
+function goStep(n) {
+  for (let i = 1; i <= totalSteps; i++) {
+    const el = document.getElementById('step-' + i);
+    if (el) el.style.display = (i === n) ? 'block' : 'none';
+  }
+  currentStep = n;
+  updateStepChips();
+  document.getElementById('step-label').textContent = 'Step ' + n + ' of ' + totalSteps;
+}
+
+function updateStepChips() {
+  const chips = document.querySelectorAll('#wizard-steps .step-chip');
+  chips.forEach((chip, i) => {
+    const s = i + 1;
+    chip.className = 'step-chip ' + (s < currentStep ? 'done' : s === currentStep ? 'active' : 'todo');
+    const n = chip.querySelector('.step-n');
+    n.textContent = s < currentStep ? '✓' : s;
+  });
+}
+
+function nextStep() {
+  if (currentStep < totalSteps) goStep(currentStep + 1);
+}
+function prevStep() {
+  if (currentStep > 1) goStep(currentStep - 1);
+}
+
+function setRegTab(el) {
+  const parent = el.closest('.reg-tabs');
+  parent.querySelectorAll('.reg-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function generateEventPage() {
+  toast('🤖 Kiro is generating your event page + QR code…');
+  setTimeout(() => {
+    document.getElementById('gen-page-wrap').style.display = 'block';
+    document.getElementById('gen-page-wrap').scrollIntoView({ behavior: 'smooth' });
+    toast('✅ Event page generated! campusconnect.app/e/kalpavikas-2.0');
+  }, 1200);
+}
+
+// ── MODALS ───────────────────────────────────────
+function openReg(name) {
+  document.getElementById('reg-title').textContent = 'Register — ' + name;
+  document.getElementById('reg-modal').classList.add('open');
+}
+function closeReg() { document.getElementById('reg-modal').classList.remove('open'); }
+function confirmReg() {
+  closeReg();
+  document.getElementById('success-title').textContent = 'Registration Confirmed! 🎉';
+  document.getElementById('success-sub').textContent = 'Your QR ticket has been generated and added to My Tickets.';
+  document.getElementById('success-modal').classList.add('open');
+}
+
+function openPayment(name, price) {
+  document.getElementById('pay-modal-title').textContent = 'Book — ' + name;
+  const p = price === 0 ? 'Free' : '₹' + price;
+  document.getElementById('pay-price').textContent = p;
+  document.getElementById('pay-total').textContent = p;
+  document.getElementById('pay-btn-amt').textContent = p;
+  document.getElementById('pay-modal').classList.add('open');
+}
+function closePay() { document.getElementById('pay-modal').classList.remove('open'); }
+function mockPay() {
+  closePay();
+  document.getElementById('success-title').textContent = 'Payment Successful! ✅';
+  document.getElementById('success-sub').textContent = 'Demo payment processed via Razorpay Test Mode. No real money was charged. Your QR ticket is ready!';
+  document.getElementById('success-modal').classList.add('open');
+}
+
+// ── EVENT DETAIL MODAL ───────────────────────────
+function openEventDetail(title, school, date, venue, price, cat, icon) {
+  document.getElementById('detail-title').textContent = title;
+  const free = price === 'Free';
+  document.getElementById('detail-body').innerHTML = `
+    <div style="display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap">
+      <span class="tag tag-tech">${cat}</span>
+      <span class="tag ${free ? 'tag-free' : 'tag-paid'}">${price}</span>
+    </div>
+    <div style="font-size:3rem;text-align:center;margin-bottom:1rem;padding:1rem;background:var(--bg3);border-radius:10px">${icon}</div>
+    <div style="display:flex;flex-direction:column;gap:.5rem;font-size:.85rem;margin-bottom:1.2rem">
+      <div style="display:flex;gap:.7rem"><span style="color:var(--muted)">🏛️ School</span><span>${school}</span></div>
+      <div style="display:flex;gap:.7rem"><span style="color:var(--muted)">📅 Date</span><span>${date}</span></div>
+      <div style="display:flex;gap:.7rem"><span style="color:var(--muted)">📍 Venue</span><span>${venue}</span></div>
+      <div style="display:flex;gap:.7rem"><span style="color:var(--muted)">📞 Contact</span><span>admissions@rvu.edu.in</span></div>
+    </div>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+      ${free
+        ? `<button class="btn btn-primary" onclick="document.getElementById('detail-modal').classList.remove('open');openReg('${title}')">📝 Register Now</button>`
+        : `<button class="btn btn-primary" onclick="document.getElementById('detail-modal').classList.remove('open');openPayment('${title}',${price.replace('₹','')})">🎟 Book Ticket</button>`
+      }
+      <button class="btn btn-outline" onclick="toast('🔗 Link copied!')">📤 Share</button>
+    </div>
+  `;
+  document.getElementById('detail-modal').classList.add('open');
+}
+
+// ── COMMUNITY ────────────────────────────────────
+function joinGroup(card, name) {
+  const btn = card.querySelector('.join-btn');
+  if (!btn || btn.textContent.trim() === 'Joined') return;
+  btn.textContent = 'Joined';
+  btn.className = 'g-joined join-btn';
+  btn.onclick = (e) => { e.stopPropagation(); leaveGroup(card, name, btn); };
+  card.style.borderColor = 'var(--green)';
+  toast('✅ Joined ' + name + '!');
+}
+function leaveGroup(card, name, btn) {
+  btn.textContent = 'Join';
+  btn.className = 'btn btn-primary btn-sm join-btn';
+  btn.onclick = (e) => { e.stopPropagation(); joinGroup(card, name); };
+  card.style.borderColor = '';
+  toast('👋 Left ' + name);
+}
+
+// ── FEED LIKES ───────────────────────────────────
+function likePost(el) {
+  const countEl = el.querySelector('span');
+  if (!countEl) return;
+  const liked = el.classList.toggle('liked');
+  countEl.textContent = liked ? parseInt(countEl.textContent) + 1 : parseInt(countEl.textContent) - 1;
+  el.innerHTML = (liked ? '💜 ' : '👍 ') + '<span>' + countEl.textContent + '</span>';
+  if (liked) el.classList.add('liked');
+}
+
+// ── LOCATION BROADCAST ───────────────────────────
+function broadcastLocation() {
+  const locs = ['SoCSE Block Seminar Hall','SDI Design Studio','Library Lawn','Main Amphitheatre','SoEB Auditorium','Sports Ground'];
+  const loc = locs[Math.floor(Math.random() * locs.length)];
+  toast('📡 You are now live at: ' + loc);
+}
+
+// ── TOAST ────────────────────────────────────────
+let toastTimer;
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// Init
+goStep(4);
+</script>
+</body>
+</html>
